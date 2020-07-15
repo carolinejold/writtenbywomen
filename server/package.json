@@ -1,0 +1,24 @@
+{
+  "name": "writtenbywomen",
+  "version": "1.0.0",
+  "description": "written by women, supporting female tech & computing journalism",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "Caroline Old",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "gender-detection": "^0.1.0",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "nodemon": "^2.0.4"
+  }
+}
