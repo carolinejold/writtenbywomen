@@ -1,0 +1,31 @@
+/* CSS RESET  */
+html {
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  body, h1, h2, h3, h4, p, ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  li {
+    list-style-type: none;
+  }
+
+/* MOBILE FIRST */
+body {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin: 1em;
+    padding: 1em;
+}
+
+#root {
+    text-align: center;
+}

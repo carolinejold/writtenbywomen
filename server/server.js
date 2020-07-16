@@ -1,6 +1,7 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const gender = require('gender-detection');
+const quote = require('inspirational-quotes');
 
 const app = express();
 
@@ -21,31 +22,25 @@ app.use(function(req, res, next) {
   next();
 });
 
-
+// TODO - add error handlers
   //iterate over results (map), then gender detect package, if statements, return the females as json
-app.get('/api/articles', async (req, res) => {
+app.get('/api/authors', async (req, res) => {
   const data = await fetchData();
   // RESULTS & SOURCING THE ARRAY OF NAMES. refactor this
   const { results } = data.response; // WORKS
-  const resultsWithTags = results.filter(result => 'tags' in result); // WORKS but returns some 'undefined' as part of array
-  const filteredResultsWithTags = resultsWithTags.filter(result => result !== undefined)
-  const arrayOfTagObjects = filteredResultsWithTags.map(result => result.tags[0]); // WORKS TO HERE
-  const filteredArrayOfTagObjects = arrayOfTagObjects.filter(result => result !== undefined)
-  const resultsWithName = filteredArrayOfTagObjects.filter(tag => 'webTitle' in tag);
-  const arrayOfNames = resultsWithName.map(tag => tag.webTitle);
+  const resultsWithTags = results.filter(x => 'tags' in x); // WORKS but returns some 'undefined' as part of array
+  const filteredResultsWithTags = resultsWithTags.filter(x => x !== undefined)
+  const arrayOfTagObjects = filteredResultsWithTags.map(x => x.tags[0]); // WORKS TO HERE
+  const filteredArrayOfTagObjects = arrayOfTagObjects.filter(x => x !== undefined)
+  const resultsWithName = filteredArrayOfTagObjects.filter(x => 'webTitle' in x);
+  const arrayOfNames = resultsWithName.map(x => x.webTitle);
   
-  // 1. apply gender detector to array of names
-      // gender detection
-      // const g = gender.detect('Holly'); // 'female'
-      // a) iterate through array and apply gender.detect to each element in array
- // GETTING ARRAY OF FEMALE NAMES
-      const arrayOfFirstNames = arrayOfNames.map(name => name.split(' ')[0]);
-      const femaleNames = arrayOfFirstNames.filter(name => gender.detect(name) === 'female')
+  const arrayOfFirstNames = arrayOfNames.map(x => x.split(' ')[0]);
+  const femaleNames = arrayOfFirstNames.filter(x => gender.detect(x) === 'female')
       
   // 2. then will have array of female names, femaleNames DONE
-    console.log(filteredArrayOfTagObjects);
     const femaleObjs = filteredArrayOfTagObjects.filter(obj => femaleNames.includes(obj.webTitle.split(' ')[0]));
-  console.log(femaleObjs)
+
   // 3. check if webTitle of results.tags[0].webTitle is equal to any of the female names
          // how to do this: if (femaleNames.includes('results.tags[0].webTitle')) {
          // return the results object with that name
@@ -54,6 +49,16 @@ app.get('/api/articles', async (req, res) => {
   res.json(femaleObjs);
   // TODO - have json file with array of unisex names which should be discluded?
 });
+
+
+// // QUOTE GENERATOR
+// const quoteGenerator = () => {
+//   quote.getRandomQuote();
+// }
+
+// quoteGenerator();
+
+
 
 const port = 5000;
 app.listen(port, () => {
