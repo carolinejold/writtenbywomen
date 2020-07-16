@@ -4,7 +4,6 @@ const gender = require('gender-detection');
 
 const app = express();
 
-
 // gender detection
 // let g;
 // g = gender.detect('Holly'); // 'female'
@@ -22,12 +21,38 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+  //iterate over results (map), then gender detect package, if statements, return the females as json
 app.get('/api/articles', async (req, res) => {
   const data = await fetchData();
-  // iterate over results to get each article, then apply tags[0].firstName to each article
-  // console.log(data.response.results[0].tags[0].firstName);
-  //iterate over results (map), then gender detect package, if statements, return the females as json
-  res.json(data);
+  // RESULTS & SOURCING THE ARRAY OF NAMES. refactor this
+  const { results } = data.response; // WORKS
+  const resultsWithTags = results.filter(result => 'tags' in result); // WORKS but returns some 'undefined' as part of array
+  const filteredResultsWithTags = resultsWithTags.filter(result => result !== undefined)
+  const arrayOfTagObjects = filteredResultsWithTags.map(result => result.tags[0]); // WORKS TO HERE
+  const filteredArrayOfTagObjects = arrayOfTagObjects.filter(result => result !== undefined)
+  const resultsWithName = filteredArrayOfTagObjects.filter(tag => 'webTitle' in tag);
+  const arrayOfNames = resultsWithName.map(tag => tag.webTitle);
+  
+  // 1. apply gender detector to array of names
+      // gender detection
+      // const g = gender.detect('Holly'); // 'female'
+      // a) iterate through array and apply gender.detect to each element in array
+ // GETTING ARRAY OF FEMALE NAMES
+      const arrayOfFirstNames = arrayOfNames.map(name => name.split(' ')[0]);
+      const femaleNames = arrayOfFirstNames.filter(name => gender.detect(name) === 'female')
+      
+  // 2. then will have array of female names, femaleNames DONE
+    console.log(filteredArrayOfTagObjects);
+    const femaleObjs = filteredArrayOfTagObjects.filter(obj => femaleNames.includes(obj.webTitle.split(' ')[0]));
+  console.log(femaleObjs)
+  // 3. check if webTitle of results.tags[0].webTitle is equal to any of the female names
+         // how to do this: if (femaleNames.includes('results.tags[0].webTitle')) {
+         // return the results object with that name
+        //  }
+  // return results objects with FEMALE names in the array of TAGS under 'webTitle'
+  res.json(femaleObjs);
+  // TODO - have json file with array of unisex names which should be discluded?
 });
 
 const port = 5000;
