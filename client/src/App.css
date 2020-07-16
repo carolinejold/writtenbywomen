@@ -1,32 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /* CSS RESET */
 .App {
     box-sizing: border-box;
     text-align: center;
+    font-family: 'Raleway', sans-serif;
   }
   
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
-  
-  body, h1, h2, h3, h4, p, ul {
+*, *:before, *:after {
+box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, p, ul {
     margin: 0;
     padding: 0;
     text-align: center;
-  }
-  
-  li {
-    list-style-type: none;
-  }
+}
 
-/* DESKTOP FIRST lol */
+li {
+    list-style-type: none;
+}
+
+/* DESKTOP FIRST */
+
+h1 {
+    font-size: 3em;
+    letter-spacing: 0.5em;
+    line-height: 1.5em;
+}
+
+h3 {
+    font-weight: normal;
+}
+
+.header-container {
+    margin: 3em 3em 2em 3em;
+}
+
 .author-container  {
-    display: grid;
+    display: inline-grid;
     justify-content: center;
-    align-content: center;
+    align-content: space-around;
     grid-template-columns: 15em 15em 15em;
     grid-template-rows: 15em;
+    margin: 4em 3em 0em 3em;
+    border: solid 3px whitesmoke;
+    max-width: 800px;
+}
+
+.author-child {
+    margin: 0.4em;
+    box-shadow: 1px 1px 9px rgb(216, 216, 216);
+}
+
+.author-child:hover {
+    
 }
 
 .author-name {
@@ -46,3 +74,13 @@ p {
     max-height: 5em;
     overflow: scroll;
 }
+
+img {
+    border-radius: 50%;
+    filter: grayscale(20%);
+}
+
+img:hover {
+    filter: saturate(150%);
+}
+

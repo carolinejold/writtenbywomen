@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 class Authors extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       data: []
     }
@@ -14,24 +14,36 @@ class Authors extends Component {
       .then(data => this.setState({ data: data }));
   }
 
-
   render() {
-    // TODO - remove <p> tags etc from bios, or sort this out in another way
-    // TODO - stop journalists being repeated
-    // TODO - EITHER make sure word "she" appears in bio, or make list of unisex names and disallow them
-    // TODO - implement image placeholder for when image and bios not available
-    // TODO - refactor class names to make BAME or whatever 
-    // TODO - implement search tos earch for topics/name, bring in more data
-    
+    const authorArray = this.state.data.map((author, index) => {
+      let cleanAuthor;
+      let authorImage;
+      if (author.bio !== undefined) {
+        cleanAuthor = author.bio.replace(/(<([^>]+)>)/ig, '');
+      }
+      if (author.bio === undefined || !author.bio) {
+        cleanAuthor = 'Sorry, there is no biography available for this author';
+      }
+      if (!author.bylineImageUrl) {
+        authorImage = 'http://sheleadsafrica.com/wp-content/uploads/2016/03/image-placeholder-female.png';
+      }
+      if (author.bylineImageUrl) {
+        authorImage = author.bylineImageUrl;
+      }
+
+      return (
+        <li className="author-child" key={index}>
+          <h4 className="author-name author-child__child">{author.webTitle}</h4>
+          <img className="author-img" src={authorImage}></img><br />
+          <a href={author.webUrl} className="author-link author-child__child">Browse {author.webTitle}'s articles</a>
+          <p className="author-child__child">{cleanAuthor}</p>
+        </li>
+      );
+    });
+
     return (
       <div className="author-container">
-        {this.state.data.map((author, index) =>
-          <li className="author-child author-child__container" key={index}>
-            <h4 className="author-name author-child__child">{author.webTitle}</h4>
-            <img className="author-img author-child__child" src={author.bylineImageUrl}></img><br/>
-            <a href={author.webUrl} className="author-link author-child__child">Browse {author.webTitle}'s articles</a>
-            <p className="author-child__child">{author.bio}</p>
-          </li>)}
+        {authorArray}
       </div>
     );
   }
