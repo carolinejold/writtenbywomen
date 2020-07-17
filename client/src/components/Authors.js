@@ -17,25 +17,25 @@ class Authors extends Component {
   render() {
     const authorArray = this.state.data.map((author, index) => {
       let cleanAuthor;
-      let authorImage;
+      let authorImg;
       if (author.bio !== undefined) {
         cleanAuthor = author.bio.replace(/(<([^>]+)>)/ig, '');
       }
-      if (author.bio === undefined || !author.bio) {
-        cleanAuthor = 'Sorry, there is no biography available for this author';
+      if (author.bio === undefined || author.bio === '' || !author.bio) {
+        cleanAuthor = 'Sorry, there is no biography available for this author, but be sure to check out her articles instead!';
       }
       if (!author.bylineImageUrl) {
-        authorImage = 'http://sheleadsafrica.com/wp-content/uploads/2016/03/image-placeholder-female.png';
+        authorImg = 'http://sheleadsafrica.com/wp-content/uploads/2016/03/image-placeholder-female.png';
       }
       if (author.bylineImageUrl) {
-        authorImage = author.bylineImageUrl;
+        authorImg = author.bylineImageUrl;
       }
 
       return (
         <li className="author-child" key={index}>
           <h4 className="author-name author-child__child">{author.webTitle}</h4>
-          <img className="author-img author-child__child" src={authorImage}></img>
-          <a href={author.webUrl} target="_blank" className="author-link author-child__child">Browse  articles</a>
+          <img className="author-img author-child__child" src={authorImg}></img>
+          <a href={author.webUrl} target="_blank" className="author-link author-child__child">Browse articles</a>
           <p className="author-description author-child__child">{cleanAuthor}</p>
         </li>
       );

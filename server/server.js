@@ -1,13 +1,8 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const gender = require('gender-detection');
-const quote = require('inspirational-quotes');
 
 const app = express();
-
-// gender detection
-// let g;
-// g = gender.detect('Holly'); // 'female'
 
 async function fetchData() {
   let response = await fetch('https://content.guardianapis.com/search?page-size=200&q=(computing%20OR%20technology)&show-tags=contributor&api-key=e462c367-e13c-41c8-a222-23587ab9acc4')
@@ -28,8 +23,7 @@ app.get('/api/authors', async (req, res) => {
   const data = await fetchData();
   // RESULTS & SOURCING THE ARRAY OF NAMES. refactor this
   const { results } = data.response; // WORKS
-  const resultsWithTags = results.filter(x => 'tags' in x); // WORKS but returns some 'undefined' as part of array
-  const filteredResultsWithTags = resultsWithTags.filter(x => x !== undefined)
+  const filteredResultsWithTags = results.filter(x => 'tags' in x).filter(x => x !== undefined)
   const arrayOfTagObjects = filteredResultsWithTags.map(x => x.tags[0]); // WORKS TO HERE
   const filteredArrayOfTagObjects = arrayOfTagObjects.filter(x => x !== undefined)
   const resultsWithName = filteredArrayOfTagObjects.filter(x => 'webTitle' in x);
@@ -47,17 +41,7 @@ app.get('/api/authors', async (req, res) => {
         //  }
   // return results objects with FEMALE names in the array of TAGS under 'webTitle'
   res.json(femaleObjs);
-  // TODO - have json file with array of unisex names which should be discluded?
 });
-
-
-// // QUOTE GENERATOR
-// const quoteGenerator = () => {
-//   quote.getRandomQuote();
-// }
-
-// quoteGenerator();
-
 
 
 const port = 5000;
