@@ -34,9 +34,9 @@ class Authors extends Component {
       return (
         <li className="author-child" key={index}>
           <h4 className="author-name author-child__child">{author.webTitle}</h4>
-          <img className="author-img" src={authorImage}></img><br />
-          <a href={author.webUrl} className="author-link author-child__child">Browse {author.webTitle}'s articles</a>
-          <p className="author-child__child">{cleanAuthor}</p>
+          <img className="author-img author-child__child" src={authorImage}></img>
+          <a href={author.webUrl} target="_blank" className="author-link author-child__child">Browse  articles</a>
+          <p className="author-description author-child__child">{cleanAuthor}</p>
         </li>
       );
     });

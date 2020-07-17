@@ -5,6 +5,7 @@
     box-sizing: border-box;
     text-align: center;
     font-family: 'Raleway', sans-serif;
+    margin-bottom: 3em;
   }
   
 *, *:before, *:after {
@@ -22,11 +23,13 @@ li {
 }
 
 /* DESKTOP FIRST */
-
 h1 {
-    font-size: 3em;
+    font-size: 3.2em;
     letter-spacing: 0.5em;
     line-height: 1.5em;
+    padding-bottom: 0.7em;
+    text-transform: uppercase;
+    max-width: 600px;
 }
 
 h3 {
@@ -34,53 +37,134 @@ h3 {
 }
 
 .header-container {
-    margin: 3em 3em 2em 3em;
+    display: inline-grid;
+    margin: 3em 1em 0em 1em;
+    padding: 3em 3em 3em 3em;
+    background: rgb(255, 255, 255, 0.6);
+    max-width: 2000px;
 }
 
 .author-container  {
     display: inline-grid;
-    justify-content: center;
-    align-content: space-around;
+    justify-content: space-around;
+    align-content: start;
     grid-template-columns: 15em 15em 15em;
-    grid-template-rows: 15em;
-    margin: 4em 3em 0em 3em;
-    border: solid 3px whitesmoke;
+    margin: 3em 0em 0em 0em;
+    padding: 1em 3em 2em 3em;
     max-width: 800px;
+    max-height: 600px;
+    overflow: scroll;
+    background-color: rgb(0, 0, 0, 0.7);
+    box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.7);
+    color: rgb(255, 255, 255, 0.8);
+    /* background-color: rgb(0, 0, 0, 0.4);
+    box-shadow: 0 0 25px 30px rgb(0, 0, 0, 0.4); */
 }
 
 .author-child {
-    margin: 0.4em;
-    box-shadow: 1px 1px 9px rgb(216, 216, 216);
+    margin: 0.5em 0em 2em 0em;
+    padding: 1em 0em 0em 0em;
+    align-content: start;
+    display: inline-grid;
+    /* box-shadow: 1px 1px 9px rgb(216, 216, 216); */
 }
 
-.author-child:hover {
-    
+.author-child__child {
+    justify-self: center;
 }
 
 .author-name {
-    font-size: 1em;
+    font-size: 1.2em;
+    font-weight: 400;
+    letter-spacing: 0em;
+    padding: 0.5em;
+    margin: 0em;
+    text-transform: uppercase;
 }
 
 .author-img {
-    width: 4em;
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.author-img:hover {
+    filter: grayscale(100%);
+    transition: 1s;
 }
 
 .author-link {
-    font-size: 1em;
+    font-size: 0.9em;
+    font-weight: lighter;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
+.author-description {
+    display: inline-flex;
+    font-size: 0.7em;
+    max-width: 200px;
+    text-align: justify;
 }
 
 p {
     font-size: 1em;
     max-height: 5em;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: wrap;
+    overflow-wrap: break-word;
 }
 
-img {
-    border-radius: 50%;
-    filter: grayscale(20%);
+.about-container {
+    display: inline-grid;
+    margin: 3em 1em 0em 1em;
+    padding: 3em 3em 3em 3em;
+    background: rgb(255, 255, 255, 0.6);
+    max-width: 700px;
 }
 
-img:hover {
-    filter: saturate(150%);
+.about-description {
+    color: white;
 }
 
+/* VIDEO BACKGROUND */
+  video { 
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -100;
+      transform: translateX(-50%) translateY(-50%);
+      background: url('//demosthenes.info/assets/images/polina.jpg') no-repeat;
+      background-size: cover;
+      transition: 1s opacity;
+  }
+  .stopfade { 
+     opacity: .5;
+  }
+  
+  a {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    background:rgba(0,0,0,0.5);
+    padding: .5rem;
+    transition: .6s background; 
+  }
+  a:hover{
+    background:rgba(0,0,0,0.9);
+  }
+
+
+  @media screen and (max-width: 500px) { 
+    div{width:70%;} 
+  }
+
+  @media screen and (max-device-width: 800px) {
+    html { background: url('https://thenewcode.com/assets/images/polina.jpg') #000 no-repeat center center fixed; }
+    #bgvid { display: none; }
+  }

@@ -7,23 +7,15 @@ html {
   *, *:before, *:after {
     box-sizing: inherit;
   }
-  
-  body, h1, h2, h3, h4, p, ul {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
-  
+
+   
   li {
     list-style-type: none;
   }
 
 /* MOBILE FIRST */
 body {
-    text-align: center;
-    margin: 1em;
-    padding: 1em;
-    animation: fadeInAnimation ease 4s;
+    animation: fadeInAnimation ease 5s;
     animation-iteration-count: 1; 
     animation-fill-mode: forwards; 
 }
